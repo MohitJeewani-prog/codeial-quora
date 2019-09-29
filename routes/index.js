@@ -14,4 +14,8 @@ router.get('/', homeController.home);
 //in order to list all the routes inside routes folder
 router.use('/users', require('./users'));
 
+
+//in order to list all the routes inside posts
+router.use('/posts', require('./posts'));
+
 module.exports = router;
