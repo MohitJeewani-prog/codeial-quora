@@ -18,4 +18,7 @@ router.use('/users', require('./users'));
 //in order to list all the routes inside posts
 router.use('/posts', require('./posts'));
 
+//in order to list all the routes inside posts
+router.use('/comments', require('./comments'));
+
 module.exports = router;
