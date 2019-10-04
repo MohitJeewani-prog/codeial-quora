@@ -16,6 +16,13 @@
 
                 <li>
                     <p>
+                        <!-- show cross button only on posts written by logged in user -->
+                        <% if(locals.user && locals.user.id == post.user.id) { %>
+                        <small>
+                            <a href="/posts/destroy/<%= post.id %>">X</a>
+                        </small>
+                        <% } %>
+
                         <%= post.content %>
                         <br>
                         <small>
@@ -35,6 +42,11 @@
                             <ul id="post-comments-<%= post._id %>">
                                 <% for(comment of post.comments) { %>
                                     <p>
+                                        <% if(locals.user && locals.user.id == comment.user.id) { %>
+                                        <small>
+                                            <a href="/comments/destroy/<%= comment.id %>">X</a>
+                                        </small>
+                                        <% } %>
                                         <%= comment.content %>
                                         <br>
                                         <small>
