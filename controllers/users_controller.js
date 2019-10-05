@@ -5,10 +5,29 @@ module.exports.profile = function(req, res){
 
     // res.end('<h1>User Profile</h1>');
 
-    return res.render('user_profile', {
-        title:"Home"
+    User.findById(req.params.id, function(err, user){
+        return res.render('user_profile', {
+            title:"User Profile",
+            profile_user: user
+        });
     });
 
+}
+
+module.exports.update = function(req, res){
+
+    //check if logged in user is real
+    if(req.user.id == req.params.id){
+
+        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+            return res.redirect('back');
+        });
+    }
+    //if someone is just fiddling with the account
+    else{
+        return res.status(401).send('Unauthorized');
+    }
+    
 }
 
 //render the sign up page
@@ -81,3 +100,4 @@ module.exports.destroySession = function(req, res){
 
     return res.redirect('/');
 }
+
