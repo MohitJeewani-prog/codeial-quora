@@ -37,6 +37,9 @@ app.use(express.urlencoded());
 //setting up cookie parser
 app.use(cookieParser());
 
+// //make the uploads path available to the browser
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
 //telling app to use express layouts
 app.use(expressLayouts);
 
@@ -50,7 +53,7 @@ app.use(express.static('./assets'));
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
-//mogo store is used to store the session cookie in the db
+//mongo store is used to store the session cookie in the db
 app.use(session({
     name: 'codeial',
     //TODO change the secret before deployment in production mode

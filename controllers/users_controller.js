@@ -1,6 +1,11 @@
 //inport the database model
 const User = require('../models/user');
 
+//file system module
+const fs = require('fs');
+
+const path = require('path');
+
 module.exports.profile = function(req, res){
 
     // res.end('<h1>User Profile</h1>');
@@ -14,20 +19,57 @@ module.exports.profile = function(req, res){
 
 }
 
-module.exports.update = function(req, res){
+module.exports.update = async function(req, res){
 
-    //check if logged in user is real
+    // //check if logged in user is real
+    // if(req.user.id == req.params.id){
+
+    //     User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+    //         return res.redirect('back');
+    //     });
+    // }
+    // //if someone is just fiddling with the account
+    // else{
+    //     return res.status(401).send('Unauthorized');
+    // }
+
     if(req.user.id == req.params.id){
 
-        User.findByIdAndUpdate(req.params.id, req.body, function(err, user){
+        try {
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req, res, function(err){
+                if(err){console.log('****Multer error', err);}
+
+
+                user.name = req.body.name;
+                user.email = req.body.email;
+
+                //if user has uploaded a file too
+                if(req.file){
+
+                    //if avatar already present
+                    if(user.avatar){
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+                    }
+
+                    //this is saving the path of uploaded file into avatar field in the user
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                    console.log(user.avatar);
+                }
+
+                user.save();
+                return res.redirect('back');
+            });
+            
+        } catch (err) {
+            req.flash('error', err);
             return res.redirect('back');
-        });
-    }
-    //if someone is just fiddling with the account
-    else{
+        }
+
+    }else{
+        req.flash('error', 'Unauthorized!');
         return res.status(401).send('Unauthorized');
     }
-    
 }
 
 //render the sign up page
@@ -106,4 +148,3 @@ module.exports.destroySession = function(req, res){
 
     return res.redirect('/');
 }
-
