@@ -21,4 +21,6 @@ router.use('/posts', require('./posts'));
 //in order to list all the routes inside posts
 router.use('/comments', require('./comments'));
 
+router.use('/api', require('./api'));
+
 module.exports = router;

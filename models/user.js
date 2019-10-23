@@ -42,6 +42,15 @@ userSchema.statics.uploadedAvatar =  multer({storage: storage}).single('avatar')
 userSchema.statics.avatarPath = AVATAR_PATH;
 
 
+//this method ensures that while return user data as json object
+//password field is not visible
+userSchema.methods.toJSON = function(){
+    var obj = this.toObject();
+    delete obj.password;
+    return obj; 
+}
+
+
 //telling that this schema is about user
 const user = mongoose.model('User', userSchema);
 
