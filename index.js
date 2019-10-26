@@ -14,6 +14,7 @@ const session = require('express-session');
 const passport = require('passport');
 const passportlocal = require('./config/passport-local-strategy');
 const passportjwt = require('./config/passport-jwt-strategy');
+const passportGoogle = require('./config/passport-google-oauth2-strategy');
 
 const MongoStore = require('connect-mongo')(session);
 
