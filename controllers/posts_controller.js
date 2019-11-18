@@ -1,6 +1,7 @@
 //import post schema
 const Post = require('../models/post');
 const Comment = require('../models/comment');
+const Like = require('../models/like')
 
 module.exports.create = async function(req, res){
 
@@ -52,6 +53,20 @@ module.exports.destroy = async function(req, res){
         //making sure only loged in user deletes the post
         //.id means converting the object id into string
         if(post.user == req.user.id){
+
+            //delete the associated likes for the post
+            await Like.deleteMany({
+                likeable: post,
+                onModel: 'Post'
+            });
+            
+            //and all its comments' likes too
+            await Like.deleteMany({
+                _id: {
+                    $in: post.comments
+                }
+            });
+
             post.remove();
 
             await Comment.deleteMany({post: req.params.id});
