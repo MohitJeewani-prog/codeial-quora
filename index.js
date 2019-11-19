@@ -6,6 +6,7 @@ const logger = require('morgan');
 //require cookie parser
 const cookieParser = require('cookie-parser');
 const app = express();
+require('./config/view-helpers')(app);
 
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
