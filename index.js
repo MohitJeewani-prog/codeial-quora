@@ -49,7 +49,7 @@ if(env.name == 'development'){
 
 
 //reading post request
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended: false}));
 
 //setting up cookie parser
 app.use(cookieParser());
