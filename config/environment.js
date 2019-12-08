@@ -15,7 +15,9 @@ const development = {
     name: 'development',
     asset_path: './assets',
     session_cookie_key: 'blahsomething',
-    db: 'codeial_development',
+
+    //changing the db
+    db: 'codeial_quora_development',
     smtp: {
         service: 'gmail',
         host: 'smtp.gmail.com',
