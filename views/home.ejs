@@ -1,5 +1,10 @@
 <link rel="stylesheet" href="<%= assetPath('css/home.css') %>">
 <link rel="stylesheet" href="<%= assetPath('css/chat_box.css') %>">
+<link rel="stylesheet" href="<%= assetPath('css/footer.css') %>">
+
+<div id="background-design">
+    <img src="<%= assetPath('images/19a1b216f31a5d18a054aef242ccacab.jpg') %>" alt="">
+</div>
 
 <div id="home-container">
     <section id="feed-posts">
@@ -33,6 +38,9 @@
         </section>
 
     <%- include('_chat_box') -%>
+    <div id = "foot">
+        <%- include('_footer.ejs')%>
+    </div>
 </div>
 
 <!-- importing this script for creating the comments -->

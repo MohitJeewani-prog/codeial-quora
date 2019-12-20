@@ -16,3 +16,7 @@
       padding: 10px;
       border-left: 1px solid lightgrey;
       height: 100%; }
+
+#background-design {
+  position: fixed;
+  z-index: -1; }

@@ -12,14 +12,14 @@
 
         <link rel="stylesheet" href="<%= assetPath('css/layout.css') %>">
         <link rel="stylesheet" href="<%= assetPath('css/header.css') %>">
-        <link rel="stylesheet" href="<%= assetPath('css/footer.css') %>">
+
         <%- style %>
 
     </head>
 
     <body>
 
-        <%- include('_header.ejs')%>
+        <!-- <%- include('_header.ejs')%> -->
 
         <!-- normal flash message -->
         <!-- <% if(flash.success && flash.success.length > 0) { %>
@@ -34,12 +34,11 @@
         <main id = "layout-main">
             <%- body %>
         </main>
-
-        <%- include('_footer.ejs')%>
+        
 
         <%- script %>
 
-        <script>
+        <!-- <script>
             <% if (flash.success && flash.success.length > 0) { %>
                 new Noty({
 
@@ -63,7 +62,7 @@
 
                 }).show();
             <% } %>
-        </script>
+        </script> -->
 
     </body>
 </html>
